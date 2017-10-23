@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicio/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:operacionSumar>
+         <!--Optional:-->
+         <numero1>15</numero1>
+         <!--Optional:-->
+         <numero2>20</numero2>
+      </ser:operacionSumar>
+   </soapenv:Body>
+</soapenv:Envelope>

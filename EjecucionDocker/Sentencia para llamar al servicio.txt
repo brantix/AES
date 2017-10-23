@@ -1,0 +1,4 @@
+##Esta sentencia usa el archivo 'llamadoServicio' en el cual se encuentra  el soap request que llama al servicio. Posteriormente devuelve un xml por consola con la respuesta en la etiqueta <Return>. Para cambiar los parametros enviados es necesario modificar las etiquetas <numero1> y <numero2> en el archivo 'llamadoservicio'##
+
+curl --header "Content-Type: text/xml;charset=UTF-8" --header "SOAPAction:ser:operacionSumar" --data @llamadoServicio http://localhost:8090/Calculadora/Sumar
+

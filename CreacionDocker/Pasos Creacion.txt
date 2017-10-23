@@ -1,0 +1,62 @@
+1. Ubicar los archivos "Dockerfile" y "Calculadora.war" en un directorio a eleccion
+2. Abrir una terminal y ubicarse en la ruta del directorio seleccionado con el comando cd ruta_del_directoro
+3. ejecutar los siguiente comandos:
+
+  #Crea la imagen "calculadora" con el tag "calc". Estos valores pueden ser modificados segun se prefiera. 
+   docker build -t calculadora:calc
+
+  #Lista las imagenes existentes. Verificar que este la imagen que se acabo de crear
+   docker images
+
+  #Ejecuta la imagen creada y le asigna el nombre "dockerjuan" al contenedor. El nombre puede ser cambiado a eleccion
+   docker run -d --name dockerjuan -p 8090:8080 calculadora:calc
+
+  #inicia el contenedor
+   docker start dockerjuan
+
+  #muestra los contenedores activos
+   docker ps
+
+
+4. Crear un archivo con el soap request que consume el servicio web y ubicarlo en el mismo directorio del punto 1
+   
+   --ejemplo de soap request
+   <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicio/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:operacionSumar>
+         <numero1>15</numero1>
+         <numero2>20</numero2>
+      </ser:operacionSumar>
+   </soapenv:Body>
+   </soapenv:Envelope>
+
+5.Ejecutar la siguiente sentencia para hacer el llamado al servicio web por consola. 
+
+curl --header "Content-Type: text/xml;charset=UTF-8" --header "SOAPAction:ser:operacionSumar" --data @llamadoServicio http://localhost:8090/Calculadora/Sumar
+
+EXPLICACION:
+------------
+-El content-Type del header es estandar, no debe ser modificado
+-En la segunda parte del header los valores a ser modifcados son los que se encuentran  despues de SOAPAction, los cuales se refieren a la operacion del servicio web a consumir.
+-Data: En esta sentencia el archivo  que contiene el soap request se llama "llamadoServicio", luego viene la URL en la que se encuentra publicado el servicio.
+
+
+6. Ejecutar la siguiente sentencia para detener el contenedor
+
+   docker stop dockerjuan
+
+7. Ejecutar la siguiente sentencia para eliminar el contenedor
+
+   docker rm serviciojuan
+
+8. Ejecutar la siguiente sentencia para eliminar la imagen
+
+   docker rmi calculadora:calc
+
+
+
+
+     
+
+
